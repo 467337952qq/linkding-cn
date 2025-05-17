@@ -11,8 +11,8 @@
 
 linkding 是一款可自行托管的书签管理器，其设计理念为极简、快速且易于通过 Docker 进行设置。
 
-他的，所有介绍，在这里：  <a href="[https://github.com/sissbruecker/linkding](https://deepwiki.com/467337952qq/linkding-cn/4.1-bookmark-views)">
-
+他的，所有介绍，在这里：  [<a href="[[https://github.com/sissbruecker/linkding](https://deepwiki.com/467337952qq/linkding-cn/4.1-bookmark-views)](https://deepwiki.com/467337952qq/linkding-c">
+](https://deepwiki.com/467337952qq/linkding-cn/4.1-bookmark-views)
 其名称来源于：
 - *link*（在日常用语中常作为 URL 和书签的同义词）
 - *Ding*（德语中意为“事物”）
