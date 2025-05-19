@@ -6,3 +6,18 @@ https://github.com/467337952qq/linkding-cn/blob/master/%E6%88%91%E7%9A%84%E6%96%
 
 
 [Alt text](https://github.com/467337952qq/linkding-cn/blob/master/%E6%88%91%E7%9A%84%E6%96%87%E6%A1%A3/%E7%BD%91%E7%AB%99UI%E8%AE%BE%E8%AE%A1/css.jpg)
+
+
+输入代码：
+[ld-bookmark-item] {
+    border-bottom: 1px solid #DCDCDC;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* 增强选择器特异性并使用 !important */
+  [ld-bookmark-item] .title a span {
+    font-weight: 900 !important; /* 使用最高字体粗细并强制生效 */
+  }
+
+发生了变化。
