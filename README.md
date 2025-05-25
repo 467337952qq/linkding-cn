@@ -11,7 +11,7 @@
 
 linkding 是一款可自行托管的书签管理器，其设计理念为极简、快速且易于通过 Docker 进行设置。
 
-而现在这个是一个汉化文件包，主要的是linkdingdata_HGYc7.zip  这个文件包，其他的都是旧的源码文件
+而现在这个是一个汉化文件包，主要的是linkdingdata_HGYc7.zip   这个文件包，这个文件包是用Version	1.40.0 (latest) 制作的，其他的都是旧的源码文件
 
 他的，所有介绍，在这里：https://deepwiki.com/467337952qq/linkding-cn/4.1-bookmark-views
 其名称来源于：
