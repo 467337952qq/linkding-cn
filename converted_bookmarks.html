@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>Chrome书签转标签化</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      width: 96%;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.6;
+      color: #333;
+    }
+    h2 {
+      color: #2c3e50;
+      text-align: center;
+    }
+    #fileInput {
+      display: block;
+      margin: 20px auto;
+      padding: 10px;
+      border: 2px dashed #3498db;
+      border-radius: 5px;
+      width: 80%;
+      text-align: center;
+      cursor: pointer;
+    }
+    #output {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin-top: 20px;
+      max-height: 500px;
+      height: 50vh;
+      width: 96%;
+      margin-left: auto;
+      margin-right: auto;
+      overflow-y: auto;
+    }
+    #fileInput:hover {
+      background: #f0f8ff;
+    }
+  </style>
+</head>
+<body>
+
+<h2>简易的Chrome书签转换工具</h2>
+<p style="text-align: center; color: #666; margin-bottom: 20px;">可以把GOOGLE chrome的书签，把目录转为标签，并保留了时间参数,（根目录下的书签不转换，BUG)</p>
+<input type="file" id="fileInput" accept=".html">
+
+<pre id="output" style="white-space: pre-wrap;"></pre>
+<button id="downloadBtn" style="display: none; margin: 10px auto; padding: 8px 16px; background: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer;">下载转换结果</button>
+
+<script>
+function parseBookmarks(htmlContent) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlContent, 'text/html');
+
+  const result = [];
+
+  function walk(node, tags = []) {
+    if (node.tagName === 'DL') {
+      for (let child of node.children) {
+        if (child.tagName === 'DT') {
+          const h3 = child.querySelector('H3');
+          if (h3) {
+            // 当前是文件夹
+            const folderName = h3.textContent.trim();
+            walk(child.querySelector('DL'), [...tags, folderName]);
+          } else {
+            const a = child.querySelector('A');
+            if (a) {
+              const title = a.textContent;
+              const href = a.getAttribute('href');
+              const addDate = a.getAttribute('ADD_DATE') || '';
+              const allTags = [...tags].filter(tag => tag !== '书签栏').join(',');
+              result.push(`<DT><A HREF="${href}" TAGS="${allTags}" ADD_DATE="${addDate}">${title}</A>`);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  const dl = doc.querySelector('dl');
+  walk(dl, ['书签栏']);
+
+  return result.join('\n');
+}
+
+document.getElementById('fileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const html = e.target.result;
+    const converted = parseBookmarks(html);
+    document.getElementById('output').textContent = converted;
+    document.getElementById('downloadBtn').style.display = 'block';
+    
+    document.getElementById('downloadBtn').onclick = function() {
+      const blob = new Blob([converted], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'converted_bookmarks.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    };
+  };
+  reader.readAsText(file);
+});
+</script>
+
+</body>
+</html>
