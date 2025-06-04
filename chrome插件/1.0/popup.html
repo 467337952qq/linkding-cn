@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Linkding Bookmark</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="nav">
+    <a class="nav-item active">增加书签</a>
+    <a class="nav-item" id="openSite">打开网站</a>
+    <a class="nav-item" id="settings">设置</a>
+  </div>
+
+  <form id="bookmarkForm">
+    <div class="form-group">
+      <label for="url">网址:</label>
+      <input type="url" id="url" required>
+      <div id="urlTip" class="url-tip" style="color: red; font-size: 12px; margin-top: 4px; display: none;">此 URL 已存在，信息为之前填写，修改后保存将会被更新</div>
+    </div>
+
+    <div class="form-group">
+      <label for="tags">标签:</label>
+      <input type="text" id="tags">
+    </div>
+
+    <div class="form-group">
+      <label for="title">标题:</label>
+      <input type="text" id="title" required>
+    </div>
+
+    <div class="form-group">
+      <div class="tab-switch">
+        <button type="button" class="tab active" data-type="desc">描述</button>
+        <button type="button" class="tab" data-type="note">笔记</button>
+      </div>
+      <div id="desc" class="content active">
+        <textarea id="descInput"></textarea>
+      </div>
+      <div id="note" class="content">
+        <textarea id="noteInput"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="readStatus" value="unread" checked>
+          <span>未读</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="readStatus" value="read">
+          <span>已读</span>
+        </label>
+        <label class="radio-label">
+          <input type="checkbox" name="shared" value="true">
+          <span>共享</span>
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">提交</button>
+  </form>
+  <script src="popup.js"></script>
+</body>
+</html>
